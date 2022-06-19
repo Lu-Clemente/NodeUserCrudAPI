@@ -23,4 +23,19 @@ try {
 }
 });
 
+router.get('/', async (req, res) => {
+    try {
+        const allUsers = await User.find();
+
+        if (!allUsers) {
+            res.status(500).json({ error: err });
+            return;
+        }
+
+        res.status(200).json({ message: "Success", list: allUsers })
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+});
+
 module.exports = router;
