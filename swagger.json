@@ -1,0 +1,236 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Simple CRUD API",
+        "description": "This NodeJs API is a basic CRUD model using MongoDB",
+        "contact": {
+            "email": "luclemente.dev@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3333/v1",
+            "description": "Run in local machine"
+        }
+    ],
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "paths": {
+        "/user/": {
+            "post": {
+                "summary": "Create new user",
+                "description": "This route will create a new user in the database.",
+                "tags": [
+                    "Users"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Products"
+                            },
+                            "examples": {
+                                "user": {
+                                    "value": {
+                                        "nickname": "jo_lee",
+                                        "name": "Joseph Lee",
+                                        "age": 25
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "500": {
+                        "description": "Server error"
+                    },
+                    "422": {
+                        "description": "Invalid user"
+                    },
+                    "201": {
+                        "description": "User successfully created!"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get list of all users",
+                "description": "This route will get a list of all users.",
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "500": {
+                        "description": "Server error"
+                    },
+                    "422": {
+                        "description": "Unexpected error"
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ProductsResponse"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{id}": {
+            "get": {
+                "summary": "Get user by ID",
+                "description": "This route will get a specific user by it's ID.",
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "Server error"
+                    },
+                    "422": {
+                        "description": "Invalid user"
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/ProductsResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update user by ID",
+                "description": "This route will update a specific user by it's ID.",
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Products"
+                            },
+                            "examples": {
+                                "user": {
+                                    "value": {
+                                        "nickname": "jo_lee",
+                                        "name": "Joseph Lee II",
+                                        "age": 26
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "500": {
+                        "description": "Server error"
+                    },
+                    "422": {
+                        "description": "No user was updated because there's no requested changes."
+                    },
+                    "404": {
+                        "description": "User not found."
+                    },
+                    "200": {
+                        "description": "User updated successfully"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete user by ID",
+                "description": "This route will delete a specific user by it's ID.",
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "Server error"
+                    },
+                    "404": {
+                        "description": "User not found."
+                    },
+                    "200": {
+                        "description": "User deleted successfully."
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Products": {
+                "type": "object",
+                "properties": {
+                    "nickname": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "age": {
+                        "type": "number"
+                    }
+                }
+            },
+            "ProductsResponse": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string"
+                    },
+                    "nickname": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "age": {
+                        "type": "number"
+                    },
+                    "__v": {
+                        "type": "number"
+                    }
+                }
+            }
+        }
+    }
+}
