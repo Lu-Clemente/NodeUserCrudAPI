@@ -22,3 +22,13 @@
 
 1. Run the server locally as instructed above.
 2. In your browser, go to "http://localhost:3333/v1/apiDocs"
+
+## Preview
+
+<p align="center">
+ <img align="center" width="100%" src="./assets/Preview1.png">
+</p>
+
+<p align="center">
+ <img align="center" width="100%" src="./assets/Preview2.png">
+</p>
