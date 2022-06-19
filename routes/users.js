@@ -2,25 +2,25 @@ const router = require('express').Router();
 const User = require('../models/User');
 
 router.post('/', async (req, res) => {
-const { nickname, name, age } = req.body;
-const user = {
-    nickname,
-    name,
-    age
-}
-
-try {
-    await User.create(user);
+    const { nickname, name, age } = req.body;
+    const user = {
+        nickname,
+        name,
+        age
+    }
 
     if (!name || !nickname || !age) {
         res.status(422).json({ error: "Invalid user." });
         return;
     }
 
-    res.status(201).json({ message: "User successfully created!" });
-} catch (err) {
-    res.status(500).json({ error: err });
-}
+    try {
+        await User.create(user);
+
+        res.status(201).json({ message: "User successfully created!" });
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
 });
 
 router.get('/', async (req, res) => {
@@ -50,6 +50,35 @@ router.get('/:id', async (req, res) => {
         }
 
         res.status(200).json({ message: "Success", user: singleUser });
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+})
+
+router.patch('/:id', async (req, res) => {
+    const id = req.params.id;
+
+    const { nickname, name, age } = req.body;
+    const user = {
+        nickname,
+        name,
+        age
+    }
+
+    if (!nickname && !name && !age) {
+        res.status(422).json({ error: "No user was updated because there's no requested changes." });
+        return;
+    }
+
+    try {
+        const updatedUser = await User.updateOne({ _id: id }, user);
+
+        if (!updatedUser) {
+            res.status(422).json({ error: err });
+            return;
+        }
+
+        res.status(200).json({ message: "User updated successfully." });
     } catch (err) {
         res.status(500).json({ error: err });
     }
