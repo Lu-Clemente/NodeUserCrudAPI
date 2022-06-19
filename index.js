@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const usersRoute = require('./routes/users');
+const swaggerUi = require('swagger-ui-express');
+const swaggerJson = require('./swagger');
 require('dotenv').config();
 
 const app = express();
@@ -12,6 +14,8 @@ app.use(
     })
 );
 app.use(express.json());
+
+app.use('/v1/apiDocs', swaggerUi.serve, swaggerUi.setup(swaggerJson));
 
 app.use('/v1/user', usersRoute);
 
