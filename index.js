@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const usersRoute = require('./routes/users');
 require('dotenv').config();
 
 const app = express();
@@ -11,6 +12,8 @@ app.use(
     })
 );
 app.use(express.json());
+
+app.use('/user', usersRoute);
 
 app.get('/', (req, res) => {
     res.json({ message: "Nothing here!" });
