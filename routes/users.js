@@ -42,14 +42,14 @@ router.get('/:id', async (req, res) => {
     const id = req.params.id;
 
     try {
-        const idUser = await User.findById(id);
+        const singleUser = await User.findById(id);
 
-        if (!idUser) {
+        if (!singleUser) {
             res.status(422).json({ error: err });
             return;
         }
 
-        res.status(200).json({ message: "Success", user: idUser });
+        res.status(200).json({ message: "Success", user: singleUser });
     } catch (err) {
         res.status(500).json({ error: err });
     }
