@@ -4,7 +4,7 @@ const usersRoute = require('./routes/users');
 require('dotenv').config();
 
 const app = express();
-const port = 3000;
+const port = 3333;
 
 app.use(
     express.urlencoded({
@@ -13,9 +13,9 @@ app.use(
 );
 app.use(express.json());
 
-app.use('/user', usersRoute);
+app.use('/v1/user', usersRoute);
 
-app.get('/', (req, res) => {
+app.get('/v1', (req, res) => {
     res.json({ message: "Nothing here!" });
 });
 
