@@ -53,7 +53,7 @@ router.get('/:id', async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err });
     }
-})
+});
 
 router.patch('/:id', async (req, res) => {
     const id = req.params.id;
@@ -82,6 +82,29 @@ router.patch('/:id', async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err });
     }
-})
+});
+
+router.delete('/:id', async (req, res) => {
+    const id = req.params.id;
+    const singleUser = await User.findById(id);
+
+    if (!singleUser) {
+        res.status(422).json({ error: "User not found." });
+        return;
+    }
+
+    try {
+        const deletedUser = await User.deleteOne({ _id: id });
+
+        if (deletedUser.deletedCount === 0) {
+            res.status(422).json({ error: "User not found." });
+            return;
+        }
+
+        res.status(200).json({ message: "User deleted successfully." });
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+});
 
 module.exports = router;
