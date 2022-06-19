@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
         const allUsers = await User.find();
 
         if (!allUsers) {
-            res.status(500).json({ error: err });
+            res.status(422).json({ error: err });
             return;
         }
 
@@ -37,5 +37,22 @@ router.get('/', async (req, res) => {
         res.status(500).json({ error: err });
     }
 });
+
+router.get('/:id', async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const idUser = await User.findById(id);
+
+        if (!idUser) {
+            res.status(422).json({ error: err });
+            return;
+        }
+
+        res.status(200).json({ message: "Success", user: idUser });
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+})
 
 module.exports = router;
