@@ -45,7 +45,7 @@ router.get('/:id', async (req, res) => {
         const singleUser = await User.findById(id);
 
         if (!singleUser) {
-            res.status(422).json({ error: err });
+            res.status(422).json({ error: "User not found." });
             return;
         }
 
@@ -73,8 +73,8 @@ router.patch('/:id', async (req, res) => {
     try {
         const updatedUser = await User.updateOne({ _id: id }, user);
 
-        if (!updatedUser) {
-            res.status(422).json({ error: err });
+        if (updatedUser.matchedCount === 0) {
+            res.status(422).json({ error: "User not found." });
             return;
         }
 
