@@ -193,6 +193,42 @@
                     }
                 }
             }
+        },
+        "/user/findByNickname": {
+            "get": {
+                "summary": "Get user by nickname",
+                "description": "This route will get a specific user by it's nickname.",
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "name": "nickname",
+                        "in": "query",
+                        "description": "User name",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "Server error"
+                    },
+                    "422": {
+                        "description": "Invalid user"
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/ProductsResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
