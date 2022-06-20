@@ -38,6 +38,23 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/findByNickname', async (req, res) => {
+    const { nickname } = req.query;
+
+    try {
+        const singleUser = await User.findOne({ nickname: nickname })
+
+        if (!singleUser) {
+            res.status(422).json({ error: "User not found." });
+            return;
+        }
+
+        res.status(200).json({ message: "Success", user: singleUser });
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+});
+
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
 
