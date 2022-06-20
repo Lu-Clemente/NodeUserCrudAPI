@@ -26,9 +26,9 @@
 ## Preview
 
 <p align="center">
- <img align="center" width="100%" src="./assets/Preview1.png">
+ <img align="center" width="70%" src="https://github.com/Lu-Clemente/SimpleCrudApi/blob/main/assets/Preview1.png">
 </p>
 
 <p align="center">
- <img align="center" width="100%" src="./assets/Preview2.png">
+ <img align="center" width="70%" src="https://github.com/Lu-Clemente/SimpleCrudApi/blob/main/assets/Preview2.png">
 </p>
