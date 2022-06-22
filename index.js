@@ -3,10 +3,13 @@ const mongoose = require('mongoose');
 const usersRoute = require('./routes/users');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJson = require('./swagger');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
 const port = 3333;
+
+app.use(cors());
 
 app.use(
     express.urlencoded({
