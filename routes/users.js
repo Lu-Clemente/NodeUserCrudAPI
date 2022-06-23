@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
     try {
-        const allUsers = await User.find();
+        const allUsers = await User.find({}, { __v: 0 });
 
         if (!allUsers) {
             res.status(422).json({ error: err });
@@ -42,7 +42,7 @@ router.get('/findByNickname', async (req, res) => {
     const { nickname } = req.query;
 
     try {
-        const singleUser = await User.findOne({ nickname: nickname })
+        const singleUser = await User.findOne({ nickname: nickname }, { __v: 0 })
 
         if (!singleUser) {
             res.status(422).json({ error: "User not found." });
@@ -59,7 +59,7 @@ router.get('/:id', async (req, res) => {
     const id = req.params.id;
 
     try {
-        const singleUser = await User.findById(id);
+        const singleUser = await User.findById(id, { __v: 0 });
 
         if (!singleUser) {
             res.status(422).json({ error: "User not found." });
