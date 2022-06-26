@@ -33,11 +33,18 @@
                                 "$ref": "#/components/schemas/Products"
                             },
                             "examples": {
-                                "user": {
+                                "user 1": {
                                     "value": {
                                         "nickname": "jo_lee",
                                         "name": "Joseph Lee",
                                         "age": 25
+                                    }
+                                },
+                                "user 2": {
+                                    "value": {
+                                        "nickname": "doritos48",
+                                        "name": "Alex",
+                                        "age": 32
                                     }
                                 }
                             }
@@ -46,13 +53,34 @@
                 },
                 "responses": {
                     "500": {
-                        "description": "Server error"
+                        "description": "Server error.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseError"
+                                }
+                            }
+                        }
                     },
                     "422": {
-                        "description": "Invalid user"
+                        "description": "Invalid user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseError"
+                                }
+                            }
+                        }
                     },
                     "201": {
-                        "description": "User successfully created!"
+                        "description": "User successfully created!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseSuccess"
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -64,20 +92,31 @@
                 ],
                 "responses": {
                     "500": {
-                        "description": "Server error"
+                        "description": "Server error.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseError"
+                                }
+                            }
+                        }
                     },
                     "422": {
-                        "description": "Unexpected error"
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseError"
+                                }
+                            }
+                        }
                     },
                     "200": {
                         "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/ProductsResponse"
-                                    }
+                                    "$ref": "#/components/schemas/ApiResponseList"
                                 }
                             }
                         }
@@ -102,18 +141,31 @@
                 ],
                 "responses": {
                     "500": {
-                        "description": "Server error"
+                        "description": "Server error.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseError"
+                                }
+                            }
+                        }
                     },
                     "422": {
-                        "description": "Invalid user"
+                        "description": "Invalid user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseError"
+                                }
+                            }
+                        }
                     },
                     "200": {
                         "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "$ref": "#/components/schemas/ProductsResponse"
+                                    "$ref": "#/components/schemas/ApiResponseSingle"
                                 }
                             }
                         }
@@ -154,16 +206,44 @@
                 },
                 "responses": {
                     "500": {
-                        "description": "Server error"
+                        "description": "Server error.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseError"
+                                }
+                            }
+                        }
                     },
                     "422": {
-                        "description": "No user was updated because there's no requested changes."
+                        "description": "No user was updated because there's no requested changes.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseError"
+                                }
+                            }
+                        }
                     },
                     "404": {
-                        "description": "User not found."
+                        "description": "User not found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseError"
+                                }
+                            }
+                        }
                     },
                     "200": {
-                        "description": "User updated successfully"
+                        "description": "User updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseSuccess"
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -183,13 +263,34 @@
                 ],
                 "responses": {
                     "500": {
-                        "description": "Server error"
+                        "description": "Server error.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseError"
+                                }
+                            }
+                        }
                     },
                     "404": {
-                        "description": "User not found."
+                        "description": "User not found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseError"
+                                }
+                            }
+                        }
                     },
                     "200": {
-                        "description": "User deleted successfully."
+                        "description": "User deleted successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseSuccess"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -211,18 +312,31 @@
                 ],
                 "responses": {
                     "500": {
-                        "description": "Server error"
+                        "description": "Server error.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseError"
+                                }
+                            }
+                        }
                     },
                     "422": {
-                        "description": "Invalid user"
+                        "description": "Invalid user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseError"
+                                }
+                            }
+                        }
                     },
                     "200": {
                         "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "$ref": "#/components/schemas/ProductsResponse"
+                                    "$ref": "#/components/schemas/ApiResponseSingle"
                                 }
                             }
                         }
@@ -261,9 +375,53 @@
                     },
                     "age": {
                         "type": "number"
+                    }
+                }
+            },
+            "ApiResponseSingle": {
+                "type": "object",
+                "properties": {
+                    "ok": {
+                        "type": "string",
+                        "example": "Success"
                     },
-                    "__v": {
-                        "type": "number"
+                    "user": {
+                        "$ref": "#/components/schemas/ProductsResponse"
+                    }
+                }
+            },
+            "ApiResponseList": {
+                "type": "object",
+                "properties": {
+                    "ok": {
+                        "type": "string",
+                        "example": "Success"
+                    },
+                    "list": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ProductsResponse"
+                        }
+                    }
+                }
+            },
+            "ApiResponseSuccess": {
+                "type": "object",
+                "properties": {
+                    "ok": {
+                        "type": "string",
+                        "example": "Success"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ApiResponseError": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string"
                     }
                 }
             }
