@@ -17,24 +17,26 @@ router.post('/', async (req, res) => {
     try {
         await User.create(user);
 
-        res.status(201).json({ message: "User successfully created!" });
+        res.status(201).json({ ok: "Success", message: "User successfully created!" });
     } catch (err) {
-        res.status(500).json({ error: err });
+        res.status(500).json({ error: "Request fail." });
+        console.log('[ERROR 101] ' + err);
     }
 });
 
 router.get('/', async (req, res) => {
     try {
-        const allUsers = await User.find();
+        const allUsers = await User.find({}, { __v: 0 });
 
         if (!allUsers) {
-            res.status(422).json({ error: err });
+            res.status(422).json({ error: "Unable to get users" });
             return;
         }
 
-        res.status(200).json({ message: "Success", list: allUsers })
+        res.status(200).json({ ok: "Success", list: allUsers })
     } catch (err) {
-        res.status(500).json({ error: err });
+        res.status(500).json({ error: "Request fail." });
+        console.log('[ERROR 102] ' + err);
     }
 });
 
@@ -42,16 +44,17 @@ router.get('/findByNickname', async (req, res) => {
     const { nickname } = req.query;
 
     try {
-        const singleUser = await User.findOne({ nickname: nickname })
+        const singleUser = await User.findOne({ nickname: nickname }, { __v: 0 })
 
         if (!singleUser) {
             res.status(422).json({ error: "User not found." });
             return;
         }
 
-        res.status(200).json({ message: "Success", user: singleUser });
+        res.status(200).json({ ok: "Success", user: singleUser });
     } catch (err) {
-        res.status(500).json({ error: err });
+        res.status(500).json({ error: "Request fail." });
+        console.log('[ERROR 103] ' + err);
     }
 });
 
@@ -59,16 +62,17 @@ router.get('/:id', async (req, res) => {
     const id = req.params.id;
 
     try {
-        const singleUser = await User.findById(id);
+        const singleUser = await User.findById(id, { __v: 0 });
 
         if (!singleUser) {
             res.status(422).json({ error: "User not found." });
             return;
         }
 
-        res.status(200).json({ message: "Success", user: singleUser });
+        res.status(200).json({ ok: "Success", user: singleUser });
     } catch (err) {
-        res.status(500).json({ error: err });
+        res.status(500).json({ error: "Request fail." });
+        console.log('[ERROR 104] ' + err);
     }
 });
 
@@ -95,9 +99,10 @@ router.patch('/:id', async (req, res) => {
             return;
         }
 
-        res.status(200).json({ message: "User updated successfully." });
+        res.status(200).json({ ok: "Success", message: "User updated successfully." });
     } catch (err) {
-        res.status(500).json({ error: err });
+        res.status(500).json({ error: "Request fail." });
+        console.log('[ERROR 105] ' + err);
     }
 });
 
@@ -118,9 +123,10 @@ router.delete('/:id', async (req, res) => {
             return;
         }
 
-        res.status(200).json({ message: "User deleted successfully." });
+        res.status(200).json({ ok: "Success", message: "User deleted successfully." });
     } catch (err) {
-        res.status(500).json({ error: err });
+        res.status(500).json({ error: "Request fail." });
+        console.log('[ERROR 106] ' + err);
     }
 });
 
