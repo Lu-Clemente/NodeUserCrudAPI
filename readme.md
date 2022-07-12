@@ -4,11 +4,11 @@
 
 1. Clone this repository to your local machine:
 
-`$ git clone https://github.com/Lu-Clemente/SimpleCrudApi`
+`$ git clone https://github.com/Lu-Clemente/NodeUserCrudAPI`
 
 2. In the terminal, navigate to this repository's folder:
 
-`$ cd SimpleCrudApi`
+`$ cd NodeUserCrudAPI`
 
 3. Install the project:
 
